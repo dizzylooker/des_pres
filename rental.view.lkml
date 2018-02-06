@@ -69,4 +69,19 @@ view: rental {
     type: count
     drill_fields: [rental_id, customer.last_name, customer.first_name, customer.customer_id, payment.count]
   }
+
+  dimension: rental_length {
+    type: number
+    sql: ${return_date} - ${rental_date} ;;
+  }
+
+  dimension: is_late {
+    type: yesno
+    sql: ${rental_length} > 7;;
+  }
+
+  measure: average_rental_length {
+    type: average
+    sql: ${rental_length} ;;
+  }
 }

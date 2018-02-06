@@ -82,4 +82,9 @@ view: customer {
       rental.count
     ]
   }
+
+  dimension: account_age {
+    type: number
+    sql: CURDATE() -  ${create_week};;
+  }
 }
