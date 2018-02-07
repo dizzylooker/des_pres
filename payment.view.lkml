@@ -77,4 +77,9 @@ view: payment {
     type: average
     sql: ${amount} ;;
   }
+
+  measure: revenue_per_store {
+    type: number
+    sql: ${total_revenue} / COUNT(${store.store_id}) ;;
+  }
 }

@@ -48,4 +48,8 @@ explore: rental {
     relationship: one_to_one
     sql_on: ${film.film_id} = ${film_list.fid} ;;
   }
+  join: store {
+    relationship: many_to_one
+    sql_on: ${inventory.store_id} = ${inventory.store_id} ;;
+  }
 }
