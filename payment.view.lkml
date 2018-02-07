@@ -64,6 +64,12 @@ view: payment {
 
   measure: total_revenue {
     type: sum
+    value_format_name: usd_0
+    sql: ${amount} ;;
+  }
+
+  measure: percentage_of_total_revenue {
+    type: percent_of_total
     sql: ${amount} ;;
   }
 

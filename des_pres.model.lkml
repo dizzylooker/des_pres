@@ -19,7 +19,7 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 # }
 explore: rental {
   group_label: "Des Video"
-  label: "Rental Analysis"
+  label: "Revenue Analysis"
   join: customer {
     relationship: many_to_one
     sql_on: ${rental.customer_id} = ${customer.customer_id} ;;
@@ -32,16 +32,20 @@ explore: rental {
     relationship: one_to_many
     sql_on: ${customer.customer_id} = ${payment.customer_id} ;;
   }
-  join: store {
-    relationship: many_to_one
-    sql_on: ${customer.store_id} = ${store.store_id} ;;
-  }
-  join: country {
-    relationship: many_to_one
-    sql_on: ${customer_list.country} = ${country.country_id} ;;
-  }
   join: repeat_rental_facts {
     relationship: one_to_one
     sql_on: ${rental.rental_id} = ${repeat_rental_facts.rental_id} ;;
+  }
+  join: inventory {
+    relationship: one_to_many
+    sql_on: ${rental.inventory_id} = ${inventory.inventory_id} ;;
+  }
+  join: film {
+    relationship: many_to_one
+    sql_on: ${inventory.film_id} = ${film.film_id} ;;
+  }
+  join: film_list {
+    relationship: one_to_one
+    sql_on: ${film.film_id} = ${film_list.fid} ;;
   }
 }
