@@ -83,8 +83,8 @@ view: customer {
     ]
   }
 
-  dimension: account_age {
-    type: number
-    sql: CURDATE() -  ${create_week};;
-  }
+  #dimension: account_age {
+  #  type: number
+  #  sql: CURDATE() -  ${create_date};;
+  #}
 }

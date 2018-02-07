@@ -84,4 +84,38 @@ view: rental {
     type: average
     sql: ${rental_length} ;;
   }
+
+# Repeat Rentals
+
+  dimension: days_until_next_rental {
+    type: number
+    view_label: "Repeat Rental Facts"
+    sql: DATEDIFF(${rental_date},${repeat_rental_facts.next_rental_date}) ;;
+  }
+
+  dimension: repeat_rentals_within_30d {
+    type: yesno
+    view_label: "Repeat Rental Facts"
+    sql: ${days_until_next_rental} <= 30 ;;
+  }
+
+  measure: count_with_repeat_purchase_within_30d {
+    type: count_distinct
+    sql: ${customer_id} ;;
+    view_label: "Repeat Rental Facts"
+
+    filters: {
+      field: repeat_rentals_within_30d
+      value: "Yes"
+    }
+  }
+
+  measure: 30_day_repeat_rental_rate {
+    description: "The percentage of members who rent again within 30 days"
+    view_label: "Repeat Rental Facts"
+    type: number
+    value_format_name: percent_1
+    sql: 1.0 * ${count_with_repeat_purchase_within_30d} / NULLIF(${count},0) ;;
+#    drill_fields: [products.brand, rental_count, count_with_repeat_purchase_within_30d]
+  }
 }

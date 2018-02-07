@@ -40,4 +40,8 @@ explore: rental {
     relationship: many_to_one
     sql_on: ${customer_list.country} = ${country.country_id} ;;
   }
+  join: repeat_rental_facts {
+    relationship: one_to_one
+    sql_on: ${rental.rental_id} = ${repeat_rental_facts.rental_id} ;;
+  }
 }
