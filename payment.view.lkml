@@ -78,8 +78,26 @@ view: payment {
     sql: ${amount} ;;
   }
 
-  measure: revenue_per_store {
-    type: number
-    sql: ${total_revenue} / COUNT(${store.store_id}) ;;
+# Dynamic filters
+
+  measure: key_metric {
+    type: sum
+    sql: ${TABLE}.{% parameter chosen_metric %};;
+  }
+
+  parameter: chosen_metric {
+    type: unquoted
+    allowed_value: {
+      label: "Count"
+      value: "count"
+    }
+    allowed_value: {
+      label: "Average Revenue"
+      value: "average_revenue"
+    }
+    allowed_value: {
+      label: "Total Revenue"
+      value: "total_revenue"
+    }
   }
 }
