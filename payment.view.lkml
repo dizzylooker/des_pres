@@ -80,7 +80,7 @@ view: payment {
 
 # Dynamic filters
 
-  measure: key_metric {
+  measure: key_metrics {
     type: sum
     sql: ${TABLE}.{% parameter chosen_metric %};;
   }
