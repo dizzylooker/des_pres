@@ -52,4 +52,12 @@ explore: rental {
     relationship: many_to_one
     sql_on: ${inventory.store_id} = ${inventory.store_id} ;;
   }
+  join: film_actor {
+    relationship: one_to_many
+    sql_on: ${film.film_id} = ${film_actor.film_id} ;;
+  }
+  join: actor {
+    relationship: many_to_one
+    sql_on: ${film_actor.actor_id} = ${actor.actor_id} ;;
+  }
 }
