@@ -77,4 +77,19 @@ view: payment {
     type: average
     sql: ${amount} ;;
   }
+
+  parameter: measure_type {
+    # Or name allowed_values
+    suggestions: ["Total Revenue","Average Revenue","Transaction Count","Min Transaction","Max Transaction"]
+  }
+
+  measure: key_metric {
+    type: number
+    sql: case when  {% condition measure_type %} 'Total Revenue' {% endcondition %}  then sum( ${TABLE}.amount)
+          when {% condition measure_type %} 'Average Revenue' {% endcondition %}  then avg( ${TABLE}.amount)
+          when {% condition measure_type %} 'Transaction Count' {% endcondition %}  then count( ${TABLE}.amount)
+          when {% condition measure_type %} 'Min Transaction' {% endcondition %}  then min( ${TABLE}.amount)
+          when {% condition measure_type %} 'Max Transaction' {% endcondition %}  then max( ${TABLE}.amount)
+          else null end;;
+  }
 }
