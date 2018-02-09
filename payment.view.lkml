@@ -66,6 +66,11 @@ view: payment {
     type: sum
     value_format_name: usd_0
     sql: ${amount} ;;
+    link: {
+      label: "Revenue Dashboard"
+      url: "https://saleseng.dev.looker.com/dashboards/171"
+      # ADD FILTERS BACK? ?State={{ _filters['users.state'] | url_encode }}&Age={{ _filters['users.age'] | url_encode }}"
+    }
   }
 
   measure: percentage_of_total_revenue {
